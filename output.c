@@ -1,16 +1,24 @@
 #include <stdio.h>
 
+#include "runtime/csv.h"
 int add(int a, int b) {
 return (a + b);
 }
 
 int main() {
-printf("%s\n", "hello world!!");
-const char* str = "input x here:";
-printf("%s\n", str);
+printf("%s\n", "input n (for nth name) here:");
 int x = ({ int __tmp; scanf("%d", &__tmp); __tmp; });
-printf("%s\n", "input y here:");
+printf("%s\n", "input m (for mth city) here:");
 int y = ({ int __tmp; scanf("%d", &__tmp); __tmp; });
+printf("%s\n", "sum:");
 printf("%d\n", add(x, y));
+CSV* data = csvRead("people.csv");
+printf("%s\n", "name:");
+const char* nom = csvGet(data, x, "name");
+printf("%s\n", nom);
+printf("%s\n", "city:");
+const char* city = csvGet(data, y, "city");
+printf("%s\n", city);
+printf("%s\n", "hello world!!");
 }
 

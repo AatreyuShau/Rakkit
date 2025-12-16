@@ -22,7 +22,10 @@ enum class TokenType {
     EOFToken,
 
     //dataTypes
-    String
+    String,
+    Int,
+    CSV,
+    Row
 };
 
 struct Token {

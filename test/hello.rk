@@ -3,12 +3,24 @@ fn add(a, b) {
 }
 
 fn main() {
-    print("hello world!!")
-
-    let str := "input x here:"
-    print(str)
+    print("input n (for nth name) here:")
     let x := input()
-    print("input y here:")
+
+    print("input m (for mth city) here:")
     let y := input()
+
+    print("sum:")
     print(add(x, y))
+
+    let data := csvRead("people.csv")
+
+    print("name:")
+    let nom := csvGet(data, x, "name")
+    print(nom)
+
+    print("city:")
+    let city := csvGet(data, y, "city")
+    print(city)
+
+    print("hello world!!")
 }

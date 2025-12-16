@@ -5,7 +5,9 @@
 
 static std::set<std::string> builtins = {
     "input",
-    "print"
+    "print",
+    "csvRead",
+    "csvGet"
 };
 
 static std::set<std::string> functions;
@@ -35,6 +37,8 @@ Type SymbolTable::lookup(const std::string& name) {
 
     if (name == "input")  return Type::Int;
     if (name == "print")  return Type::Void;
+    if (name == "csvRead")  return Type::CSV;
+    if (name == "csvGet")  return Type::String;
 
     if (functions.count(name))
         return Type::Function;
@@ -66,7 +70,9 @@ Type analyzeExpr(const Expr* expr, SymbolTable& table) {
 
         if (calleeType != Type::Function &&
             callExpr->callee != "input" &&
-            callExpr->callee != "print") {
+            callExpr->callee != "print" &&
+            callExpr->callee != "csvRead" &&
+            callExpr->callee != "csvGet") {
             throw std::runtime_error("Not a function: " + callExpr->callee);
         }
 
@@ -74,7 +80,9 @@ Type analyzeExpr(const Expr* expr, SymbolTable& table) {
             analyzeExpr(arg.get(), table);
 
         if (callExpr->callee == "print") return Type::Void;
-        if (callExpr->callee == "input") return Type::String;
+        if (callExpr->callee == "input") return Type::Int;
+        if (callExpr->callee == "csvRead") return Type::CSV;
+        if (callExpr->callee == "csvGet") return Type::String;
 
         return Type::Int;
     }
@@ -82,14 +90,15 @@ Type analyzeExpr(const Expr* expr, SymbolTable& table) {
     throw std::runtime_error("Unknown expression");
 }
 
-void analyzeStmt(const Stmt* stmt, SymbolTable& table) {
-    if (auto letStmt = dynamic_cast<const LetStmt*>(stmt)) {
+void analyzeStmt(Stmt* stmt, SymbolTable& table) {
+    if (auto letStmt = dynamic_cast<LetStmt*>(stmt)) {
         Type rhs = analyzeExpr(letStmt->value.get(), table);
+        letStmt->type = rhs;
         if (!table.declare(letStmt->name, rhs)) {
             throw std::runtime_error("Variable already declared: " + letStmt->name);
         }
     }
-    else if (auto exprStmt = dynamic_cast<const ExprStmt*>(stmt)) {
+    else if (auto exprStmt = dynamic_cast<ExprStmt*>(stmt)) {
         analyzeExpr(exprStmt->expr.get(), table);
     }
 }

@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
     generateC(functions, "output.c");
 
     std::cout << "[clang] compiling output.c...\n";
-    if (system("clang output.c -o output") != 0) {
+    if (system("clang output.c runtime/csv.c -o output") != 0) {
         std::cerr << "C compilation failed\n";
         return 1;
     }

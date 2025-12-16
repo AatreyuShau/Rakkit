@@ -9,12 +9,12 @@ enum class Type {
     Int,
     String,
     Void,
+    CSV,
+    Row,
     Function
 };
 
-//struct Expr {
-//    virtual ~Expr() = default;
-//};
+///
 
 struct Expr {
     virtual ~Expr() = default;
@@ -79,9 +79,7 @@ struct BinExpr : Expr {
     }
 };
 
-//struct Stmt {
-//    virtual ~Stmt() = default;
-//};
+///
 
 struct Stmt {
     virtual ~Stmt() = default;

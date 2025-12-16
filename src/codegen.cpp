@@ -22,6 +22,24 @@ static void genExpr(std::ofstream& out, const Expr* expr) {
         out << ")";
     }
     else if (auto callExpr = dynamic_cast<const CallExpr*>(expr)) {
+
+        if (callExpr->callee == "csvRead") {
+            out << "csvRead(";
+            genExpr(out, callExpr->args[0].get());
+            out << ")";
+            return;
+        }
+
+        if (callExpr->callee == "csvGet") {
+            out << "csvGet(";
+            for (size_t i = 0; i < callExpr->args.size(); ++i) {
+                genExpr(out, callExpr->args[i].get());
+                if (i + 1 < callExpr->args.size()) out << ", ";
+            }
+            out << ")";
+            return;
+        }
+
         if (callExpr->callee == "input") {
             out << "({ int __tmp; scanf(\"%d\", &__tmp); __tmp; })";
             return;
@@ -40,10 +58,13 @@ static void genExpr(std::ofstream& out, const Expr* expr) {
                 if (varTypes[v->name] == Type::String)
                     isString = true;
             }
+            else if (auto call = dynamic_cast<const CallExpr*>(arg)) {
+                if (call->callee == "csvGet")
+                    isString = true;
+            }
 
             out << (isString ? "\"%s\\n\", " : "\"%d\\n\", ");
             
-            //genExpr(out, callExpr->args[0].get());
             for (size_t i = 0; i < callExpr->args.size(); ++i) {
                 genExpr(out, callExpr->args[i].get());
                 if (i + 1 < callExpr->args.size()) out << ", ";
@@ -65,10 +86,20 @@ static void genStmt(std::ofstream& out, const Stmt* stmt) {
     if (auto letStmt = dynamic_cast<const LetStmt*>(stmt)) {
         varTypes[letStmt->name] = letStmt->type;
 
-        if (letStmt->type == Type::Int)
-            out << "int ";
-        else if (letStmt->type == Type::String)
-            out << "const char* ";
+        switch (letStmt->type) {
+            case Type::Int:
+                out << "int ";
+                break;
+            case Type::String:
+                out << "const char* ";
+                break;
+            case Type::CSV:
+                out << "CSV* ";
+                break;
+            default:
+                out << "int ";
+        }
+
         out << letStmt->name << " = ";
         genExpr(out, letStmt->value.get());
         out << ";\n";
@@ -109,6 +140,7 @@ void generateC(const std::vector<Function>& functions, const std::string& filena
     }
 
     out << "#include <stdio.h>\n\n";
+    out << "#include \"runtime/csv.h\"\n";
 
     // Generate all functions
     for (const auto& fn : functions) {
