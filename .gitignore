@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# local ide settings
+.vscode/
+.idea/
+.codex/
+*.code-workspace
