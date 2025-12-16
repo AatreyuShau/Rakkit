@@ -51,26 +51,19 @@ cd Rakkit
 
 ## 
 
-### 3️Build Rakkit
+### 3️Build & Install Rakkit
 
 ```bash
-clang++ src/*.cpp -Iinclude -o rak
+./install.sh
 ```
+Runnning this after cloning will auto install for you
 
-## 
-
-### 4️Install globally
-
-```bash
-sudo mv rak /usr/local/bin/rak
-```
-
-Verify:
-```bash
-rak
-```
-
-You should see usage instructions.
+*
+    > for verification later on;
+    > ```bash
+    > rak
+    > ```
+    > You should see usage instructions.
 
 ---
 
