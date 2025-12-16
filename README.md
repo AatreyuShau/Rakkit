@@ -15,13 +15,55 @@ Rakkit is an experimental compiled programming language and toolchain written in
 ## Features
 
 * `fn`-based syntax
-* Integer and string literals _(so far)_
+* Integer and string literals _(so far)_ along with custom csv literals
 * Variables (defined using `let`)
 * Functions & function calls
 * Built-in functions: `input`, `print`
 * Automatic C code generation
 * Single command compile & run
 * File & directory inspection via `rak peep`
+
+---
+
+## Installation (macOS / Linux)
+
+### 1️Prerequisites
+
+Make sure you have:
+* **Clang**
+* **C++ compiler**
+
+Check:
+
+```bash
+clang --version
+```
+Ensure its at least version 17.0.0
+
+## 
+
+### 2️Clone the repository
+
+```bash
+git clone https://github.com/AatreyuShau/Rakkit.git
+cd Rakkit
+```
+
+## 
+
+### 3️Build & Install Rakkit
+
+```bash
+./install.sh
+```
+Runnning this after cloning will auto install for you
+
+*
+    > for verification later on;
+    > ```bash
+    > rak
+    > ```
+    > You should see usage instructions.
 
 ---
 
@@ -76,54 +118,6 @@ Examples:
 ```bash
 rak peep test/hello.rk
 ```
-
----
-
-## Installation (macOS / Linux)
-
-### 1️Prerequisites
-
-Make sure you have:
-* **Clang**
-* **C++ compiler**
-
-Check:
-
-```bash
-clang --version
-```
-
----
-
-### 2️Clone the repository
-
-```bash
-git clone https://github.com/AatreyuShau/Rakkit.git
-cd Rakkit
-```
-
----
-
-### 3️Build Rakkit
-
-```bash
-clang++ src/*.cpp -Iinclude -o rak
-```
-
----
-
-### 4️Install globally
-
-```bash
-sudo mv rak /usr/local/bin/rak
-```
-
-Verify:
-```bash
-rak
-```
-
-You should see usage instructions.
 
 ---
 
