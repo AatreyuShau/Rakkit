@@ -85,7 +85,7 @@ rak peep test/hello.rk
 
 Make sure you have:
 * **Clang**
-* **C++ compiler with C++17 support**
+* **C++ compiler**
 
 Check:
 
