@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <unistd.h>
 
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -50,6 +51,13 @@ void peepPath(const std::string& path) {
         }
         closedir(dir);
     }
+}
+
+std::string getDirname(const std::string& path) {
+    size_t pos = path.find_last_of("/\\");
+    if (pos == std::string::npos)
+        return ".";
+    return path.substr(0, pos);
 }
 
 int main(int argc, char** argv) {
@@ -105,6 +113,12 @@ int main(int argc, char** argv) {
     std::cout << "[clang] compiling output.c...\n";
     if (system("clang output.c runtime/csv.c -o output") != 0) {
         std::cerr << "C compilation failed\n";
+        return 1;
+    }
+
+    std::string workdir = getDirname(filename);
+    if (chdir(workdir.c_str()) != 0) {
+        perror("chdir failed");
         return 1;
     }
 
