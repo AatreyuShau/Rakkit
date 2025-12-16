@@ -1,0 +1,14 @@
+fn add(a, b) {
+    return(a + b)
+}
+
+fn main() {
+    print("hello world!!")
+
+    let str := "input x here:"
+    print(str)
+    let x := input()
+    print("input y here:")
+    let y := input()
+    print(add(x, y))
+}
