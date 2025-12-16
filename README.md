@@ -25,6 +25,54 @@ Rakkit is an experimental compiled programming language and toolchain written in
 
 ---
 
+## Installation (macOS / Linux)
+
+### 1️Prerequisites
+
+Make sure you have:
+* **Clang**
+* **C++ compiler**
+
+Check:
+
+```bash
+clang --version
+```
+
+## 
+
+### 2️Clone the repository
+
+```bash
+git clone https://github.com/AatreyuShau/Rakkit.git
+cd Rakkit
+```
+
+## 
+
+### 3️Build Rakkit
+
+```bash
+clang++ src/*.cpp -Iinclude -o rak
+```
+
+## 
+
+### 4️Install globally
+
+```bash
+sudo mv rak /usr/local/bin/rak
+```
+
+Verify:
+```bash
+rak
+```
+
+You should see usage instructions.
+
+---
+
 ## Example
 
 ### Rakkit code (`test/hello.rk`)
@@ -76,54 +124,6 @@ Examples:
 ```bash
 rak peep test/hello.rk
 ```
-
----
-
-## Installation (macOS / Linux)
-
-### 1️Prerequisites
-
-Make sure you have:
-* **Clang**
-* **C++ compiler**
-
-Check:
-
-```bash
-clang --version
-```
-
----
-
-### 2️Clone the repository
-
-```bash
-git clone https://github.com/AatreyuShau/Rakkit.git
-cd Rakkit
-```
-
----
-
-### 3️Build Rakkit
-
-```bash
-clang++ src/*.cpp -Iinclude -o rak
-```
-
----
-
-### 4️Install globally
-
-```bash
-sudo mv rak /usr/local/bin/rak
-```
-
-Verify:
-```bash
-rak
-```
-
-You should see usage instructions.
 
 ---
 
