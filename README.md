@@ -38,6 +38,7 @@ Check:
 ```bash
 clang --version
 ```
+Ensure its at least version 17.0.0
 
 ## 
 
