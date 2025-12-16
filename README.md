@@ -15,7 +15,7 @@ Rakkit is an experimental compiled programming language and toolchain written in
 ## Features
 
 * `fn`-based syntax
-* Integer and string literals _(so far)_
+* Integer and string literals _(so far)_ along with custom csv literals
 * Variables (defined using `let`)
 * Functions & function calls
 * Built-in functions: `input`, `print`
