@@ -13,6 +13,7 @@ enum class TokenType {
 
     //symbol type ish
     LParen, RParen,
+    RSquare,
     LBrace, RBrace,
     Plus, Minus, Star, Slash,
     ColonEq,

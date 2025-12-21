@@ -9,16 +9,16 @@ fn main() {
     print("input m (for mth city) here:")
     let y := input()
 
-    print("sum:")
+    print("sum: "]
     print(add(x, y))
 
     let data := csvRead("people.csv")
 
-    print("name:")
+    printin("name: ")
     let nom := csvGet(data, x, "name")
     print(nom)
 
-    print("city:")
+    printin("city: "]
     let city := csvGet(data, y, "city")
     print(city)
 

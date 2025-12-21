@@ -44,7 +44,7 @@ static void genExpr(std::ofstream& out, const Expr* expr) {
             out << "({ int __tmp; scanf(\"%d\", &__tmp); __tmp; })";
             return;
         } 
-        else if (callExpr->callee == "print") {
+        else if (callExpr->callee == "print" || callExpr->callee == "printin") {
             out << "printf(";
 
             const Expr* arg = callExpr->args[0].get();
@@ -63,12 +63,13 @@ static void genExpr(std::ofstream& out, const Expr* expr) {
                     isString = true;
             }
 
-            out << (isString ? "\"%s\\n\", " : "\"%d\\n\", ");
-            
-            for (size_t i = 0; i < callExpr->args.size(); ++i) {
-                genExpr(out, callExpr->args[i].get());
-                if (i + 1 < callExpr->args.size()) out << ", ";
+            if (callExpr->callee == "print") {
+                out << (isString ? "\"%s\\n\", " : "\"%d\\n\", ");
+            } else if (callExpr->callee == "printin") {
+                out << (isString ? "\"%s\", " : "\"%d\", ");
             }
+            
+            genExpr(out, callExpr->args[0].get());
             out << ")";
         } 
         else {

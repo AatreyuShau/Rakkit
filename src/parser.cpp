@@ -41,7 +41,7 @@ Function Parser::parseFunction() {
             params.push_back(advance().lexeme); // ident
         } while (match(TokenType::Comma));
         if (peek().type != TokenType::RParen) {
-            throw std::runtime_error("Expected ')'");
+            throw std::runtime_error("Expected ')' 1");
         }
         advance();
     }
@@ -124,13 +124,26 @@ std::unique_ptr<Expr> Parser::parseFactor() {
         if (match(TokenType::LParen)) {
             std::vector<std::unique_ptr<Expr>> args;
 
+            auto ogPos = pos;
+
             if (!match(TokenType::RParen)) {
                 do {
                     args.push_back(parseExpression());
                 } while (match(TokenType::Comma));
 
                 if (!match(TokenType::RParen)) {
-                    throw std::runtime_error("Expected ')'");
+                    pos = ogPos;
+                    if (!match(TokenType::RSquare)) {
+                        do {
+                            args.push_back(parseExpression());
+                        } while (match(TokenType::Comma));
+
+                        if (!match(TokenType::RSquare)) {
+                            throw std::runtime_error("Expected ')' 2");
+                        } else {
+                            return std::make_unique<CallExpr>("printin", std::move(args));
+                        }
+                    } //
                 }
             }
 
@@ -142,7 +155,7 @@ std::unique_ptr<Expr> Parser::parseFactor() {
 
     if (match(TokenType::LParen)) {
         auto expr = parseExpression();
-        expect(TokenType::RParen, "Expected ')'");
+        expect(TokenType::RParen, "Expected ')' 3");
         return expr;
     }
 

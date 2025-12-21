@@ -6,6 +6,7 @@
 static std::set<std::string> builtins = {
     "input",
     "print",
+    "printin",
     "csvRead",
     "csvGet"
 };
@@ -37,6 +38,7 @@ Type SymbolTable::lookup(const std::string& name) {
 
     if (name == "input")  return Type::Int;
     if (name == "print")  return Type::Void;
+    if (name == "printin")  return Type::Void;
     if (name == "csvRead")  return Type::CSV;
     if (name == "csvGet")  return Type::String;
 
@@ -71,6 +73,7 @@ Type analyzeExpr(const Expr* expr, SymbolTable& table) {
         if (calleeType != Type::Function &&
             callExpr->callee != "input" &&
             callExpr->callee != "print" &&
+            callExpr->callee != "printin" &&
             callExpr->callee != "csvRead" &&
             callExpr->callee != "csvGet") {
             throw std::runtime_error("Not a function: " + callExpr->callee);
@@ -80,6 +83,7 @@ Type analyzeExpr(const Expr* expr, SymbolTable& table) {
             analyzeExpr(arg.get(), table);
 
         if (callExpr->callee == "print") return Type::Void;
+        if (callExpr->callee == "printin") return Type::Void;
         if (callExpr->callee == "input") return Type::Int;
         if (callExpr->callee == "csvRead") return Type::CSV;
         if (callExpr->callee == "csvGet") return Type::String;

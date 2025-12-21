@@ -73,6 +73,7 @@ std::vector<Token> Lexer::tokenize() {
         switch (c) {
             case '(': tokens.push_back({TokenType::LParen, "("}); break;
             case ')': tokens.push_back({TokenType::RParen, ")"}); break;
+            case ']': tokens.push_back({TokenType::RSquare, "]"}); break;
             case '{': tokens.push_back({TokenType::LBrace, "{"}); break;
             case '}': tokens.push_back({TokenType::RBrace, "}"}); break;
             case '+': tokens.push_back({TokenType::Plus, "+"}); break;
