@@ -153,19 +153,6 @@ sudo rm /usr/local/bin/rak
 
 ---
 
-## Project Structure
-
-```
-Rakkit/
-├── include/        # Headers (AST, lexer, parser, sema, codegen)
-├── src/            # Compiler implementation
-├── test/           # Sample .rk files
-├── output.c        # Generated C code (temporary)
-└── README.md
-```
-
----
-
 ## Notes & Limitations
 
 * Strings are currently `const char*` in generated C
