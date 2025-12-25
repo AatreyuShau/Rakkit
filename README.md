@@ -176,18 +176,6 @@ Rakkit/
 
 ---
 
-## Why Rakkit?
-
-Because building a language taught me:
-* Parsing
-* AST design
-* Semantic analysis
-* Code generation
-* Toolchains
-* Pain :D
-
----
-
 ##LICENSE
 
 [GNU GPL v3.0](https://github.com/AatreyuShau/Rakkit/blob/main/LICENSE)
