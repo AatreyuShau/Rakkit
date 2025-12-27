@@ -10,8 +10,6 @@ Rakkit is an experimental compiled programming language and toolchain written in
 ~Compiles the generated `C` code
 ~Provides commands to run the generated `C` code
 
----
-
 ## Features
 
 * `fn`-based syntax
@@ -136,6 +134,13 @@ sudo rm /usr/local/bin/rak
 ```
 
 ---
+## Feel free to contribute to this project!
+
+<a href="https://github.com/AatreyuShau/Rakkit/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=AatreyuShau/Rakkit" />
+</a>
+
+---
 
 ## Platform Support
 
@@ -163,6 +168,6 @@ sudo rm /usr/local/bin/rak
 
 ---
 
-##LICENSE
+## LICENSE
 
 [GNU GPL v3.0](https://github.com/AatreyuShau/Rakkit/blob/main/LICENSE)
