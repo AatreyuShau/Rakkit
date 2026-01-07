@@ -83,10 +83,7 @@ std::vector<Token> Lexer::tokenize() {
             case ',': tokens.push_back({TokenType::Comma, ","}); break;
 
             case ':':
-                if (peek() == '=') {
-                    advance();
-                    tokens.push_back({TokenType::ColonEq, ":="});
-                }
+                tokens.push_back({TokenType::ColonEq, ":="});
                 break;
 
             default:

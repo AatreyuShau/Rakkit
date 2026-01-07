@@ -4,7 +4,7 @@ fn add(a, b) {
 
 fn main() {
     print("input n (for nth name) here:")
-    let x := input()
+    let x : input()
 
     print("input m (for mth city) here:")
     let y := input()
@@ -12,7 +12,7 @@ fn main() {
     print("sum: "]
     print(add(x, y))
 
-    let data := csvRead("people.csv")
+    let data : csvRead("people.csv")
 
     printin("name: ")
     let nom := csvGet(data, x, "name")
